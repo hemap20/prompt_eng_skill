@@ -52,6 +52,22 @@ sibling `conversation-design` skill — combine both when building a conversatio
   discipline: confidence-score validation, the cost of added mandatory steps,
   subtractive-change testing, cross-domain transfer pitfalls, and telling apart
   different error types before choosing a fix.
+- **Optimizing for "catch everything, filter by score later" (recall-first)?** → See
+  `references/recall-first-prompt-design.md`: grading instead of filtering, one
+  anchored confidence scale, verdict-token logprobs, which structured fields help,
+  definition structure without contradictions (Clear/Possible/Never plus one
+  "about a violation" section), anti-flood rules, and grounding.
+- **Setting up or auditing an evaluation pipeline** (ground truth, dev set, matcher,
+  threshold tables, comparing prompt versions)? → See
+  `references/evaluation-pipeline-playbook.md`, plus the ready-to-paste task prompts
+  in `assets/moderation-eval-kit/`.
+- **Diagnosing why a flagging model is wrong** (FP taxonomy, FN analysis,
+  hard-negative audits, mining the model's justifications)? → See
+  `references/error-analysis-playbook.md`.
+- **Starting a similar moderation project?** → Read
+  `references/case-study-audio-moderation-2026.md` first: the timeline, numbers,
+  decisions, open issues, and the roadmap beyond prompting (verification,
+  detectors, calibration, training, Indian-language models).
 - **Building a conversational bot that needs both good dialogue *and* tool use /
   reasoning?** → Combine this skill with `conversation-design`: use ReAct-style
   reasoning under the hood for information-gathering turns, and conversation-design
@@ -107,6 +123,24 @@ sibling `conversation-design` skill — combine both when building a conversatio
   changes, exception-list limits, grounding/hallucination architecture, cross-domain
   transfer pitfalls, and evaluation-methodology traps (small-sample noise, fallible
   ground truth, error-type misdiagnosis).
+- `references/recall-first-prompt-design.md` — Prompt design for recall-first
+  flagging: grading instead of filtering, removing alarm language, anchored
+  confidence scales, ranking signals (self-report, verdict-token logprob, entropy;
+  thinking-mode caveats), structured fields, definition structure, anti-flood,
+  grounding, model-specific behaviour.
+- `references/evaluation-pipeline-playbook.md` — End-to-end measurement: ground
+  truth provenance and corrections, dev-set construction, run plumbing (schema
+  mapping, compliance, timestamps, logprob location), matcher design and
+  validation, scoring definitions (strict/loose TP, redundant flags), required
+  tables, how to compare versions, and an audit checklist.
+- `references/error-analysis-playbook.md` — The FP taxonomy with ordered types and
+  code-enforced rules, the classification process and human review, FN analysis,
+  hard-negative audits, mining justifications, and testing labels as filters.
+- `references/case-study-audio-moderation-2026.md` — Timeline, numbers, decisions,
+  open issues and roadmap from the audio-moderation series.
+- `assets/moderation-eval-kit/` — Ready-to-paste coding-agent task prompts (dev
+  set, plumbing, prompt-version setup, FP classification) and a template for a
+  recall-first prompt and schema.
 
 (More references will be added here as additional source material is processed —
 each new technique gets its own file, linked from this list.)

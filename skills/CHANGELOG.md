@@ -3,6 +3,21 @@
 All notable updates to these skills are logged here, most recent first. When asking
 Claude to update a skill with a new learning, also ask it to add a line here.
 
+## 2026-10-07
+- Added four references from the 2026 audio-moderation series (Gemma audio models
+  vs Gemini, 5 Indian languages, prompts v1–v6.1):
+  - `recall-first-prompt-design.md`;
+  - `evaluation-pipeline-playbook.md`;
+  - `error-analysis-playbook.md`;
+  - `case-study-audio-moderation-2026.md`.
+- Added `prompt-engineering/assets/moderation-eval-kit/`: ready-to-paste task
+  prompts plus a template for a recall-first prompt and schema.
+- Revised two bullets in `iteration-and-evaluation-discipline.md` (per-category
+  confidence calibration; "prefer logprobs over self-report").
+- Correction to an earlier draft that was never committed: the claim that
+  thinking-model logprobs were "below chance" came from a token-offset bug. It's
+  invalid, not a finding.
+
 ## 2026-09-23
 - Added `prompt-engineering/references/iteration-and-evaluation-discipline.md` —
   field-tested evaluation/iteration lessons from audio content-moderation

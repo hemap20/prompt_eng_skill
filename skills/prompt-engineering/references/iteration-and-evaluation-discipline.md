@@ -17,15 +17,19 @@ concerns.
   self-reported confidence field as meaningful until you've checked whether it
   actually separates known-correct from known-incorrect outputs on labeled data.
 - Confidence scores cluster near the extremes (very high when confident, well below
-  0.5 when not) and rarely land in a useful "medium" band unless you explicitly
-  engineer a calibration scheme into the prompt (e.g. "use <0.5 for mild cases, 0.7+
-  only for severe/explicit cases"). A usable mid-confidence bucket won't emerge on
-  its own — you have to instruct for it directly, per severity level.
-- If the model exposes token-level log probabilities, prefer computing confidence
-  directly from those (decision probability and, separately, category-choice
-  probability) over any self-reported number. A combined score (e.g. geometric mean
-  of the two) tends to be more informative than either alone, and more trustworthy
-  than any self-report.
+  0.5 when not) and rarely land in a useful "medium" band unless the prompt defines
+  one. *Revised (2026 series):* per-category calibration rules ("<0.5 for mild cases,
+  0.7+ only for severe cases") made confidence reflect the category rule rather than
+  correctness. One anchored scale shared by all categories, tied to the definition
+  tiers, ranked far better (AUROC 0.75 → 0.91); see `recall-first-prompt-design.md`.
+- If the model exposes token-level log probabilities, compute logprob-based scores
+  and validate them alongside the self-reported number. *Revised (2026 series):*
+  neither wins by default. The logprob of the category token saturates, because the
+  model has already committed. A verdict token placed after the reasoning fields
+  was the best signal for no-thinking models (AUROC 0.93), while self-reported
+  confidence beat the category-token logprob. For thinking models, map positions
+  only after the thinking text, or every value is wrong. See
+  `recall-first-prompt-design.md` §5.
 - Bucketed confidence analysis can silently drop out-of-range values (e.g. a flag
   scoring below your "low" threshold cutoff), making it invisible to bucketed
   reporting even though it still counts toward raw precision/accuracy. Check for
